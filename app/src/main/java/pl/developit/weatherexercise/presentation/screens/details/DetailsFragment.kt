@@ -38,15 +38,11 @@ class DetailsFragment : BaseFragment(), DetailsListener {
                     it.listener = this
                     it.viewModel = viewModel
                 }
+        observeEvents()
+
         mainCommunicator.showActionBarBackButton()
 
         viewModel.city.value = arguments?.city
-        viewModel.liveEvent.observe(this, Observer {
-            when (it) {
-                is DetailsViewModel.DetailsEvent.Error -> showError(it.error)
-                is DetailsViewModel.DetailsEvent.ConditionsReady -> resolveTemperatureColor(it.conditions.temperature.metric)
-            }
-        })
         viewModel.getConditions()
         return binding.root
     }
@@ -73,6 +69,15 @@ class DetailsFragment : BaseFragment(), DetailsListener {
             viewModel.city.value = it.city
             viewModel.conditions.value = it.conditions
         }
+    }
+
+    private fun observeEvents() {
+        viewModel.liveEvent.observe(this, Observer {
+            when (it) {
+                is DetailsViewModel.DetailsEvent.Error -> showError(it.error)
+                is DetailsViewModel.DetailsEvent.ConditionsReady -> resolveTemperatureColor(it.conditions.temperature.metric)
+            }
+        })
     }
 
     private fun resolveTemperatureColor(temperatureModel: Temperature.Model) {

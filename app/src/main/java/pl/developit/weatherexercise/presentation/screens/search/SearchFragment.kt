@@ -32,12 +32,8 @@ class SearchFragment : BaseFragment(), SearchListener {
                 it.listener = this
                 it.viewModel = viewModel
             }
+        observeEvents()
 
-        viewModel.liveEvent.observe(this, Observer {
-            when (it) {
-                is SearchViewModel.SearchEvent.Error -> showError(it.error)
-            }
-        })
         viewModel.getCityHistory()
         return binding.root
     }
@@ -62,6 +58,14 @@ class SearchFragment : BaseFragment(), SearchListener {
 
     override fun onCityClick(city: City) {
         mainCommunicator.showDetailsFragment(city)
+    }
+
+    private fun observeEvents() {
+        viewModel.liveEvent.observe(this, Observer {
+            when (it) {
+                is SearchViewModel.SearchEvent.Error -> showError(it.error)
+            }
+        })
     }
 
 }
