@@ -1,3 +1,12 @@
 <resources>
+    <string name="sharedpreferences_file_key">shared preferences</string>
     <string name="app_name">WeatherExercise</string>
+
+    <string name="swipe_to_refresh">Swipe to Refresh</string>
+    <string name="enter_city_name">Enter city name</string>
+    <string name="city_name">City name</string>
+    <string name="city_name_is_incorrect">City name is incorrect</string>
+    <string name="unexpected_error_occurred">Unexpected error occurred. Please try again later</string>
+    <string name="temperature_text">The temperature is: %1$s*%2$s</string>
+
 </resources>

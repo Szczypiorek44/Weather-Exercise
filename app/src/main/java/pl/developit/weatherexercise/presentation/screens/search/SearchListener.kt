@@ -1,0 +1,6 @@
+package pl.developit.weatherexercise.presentation.screens.search
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import pl.developit.weatherexercise.presentation.screens.search.adapters.CityAdapter
+
+interface SearchListener : SwipeRefreshLayout.OnRefreshListener, CityAdapter.OnCityClickCallback

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="pl.developit.weatherexercise.presentation.screens.search.SearchViewModel" />
+
+        <variable
+            name="listener"
+            type="pl.developit.weatherexercise.presentation.screens.search.SearchListener" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:completionThreshold="1"
+                android:hint="@string/city_name"
+                android:text="@={viewModel.cityName}"
+                app:cityHistory="@{viewModel.cityHistory}"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:showDropDownOnFocus="@{true}" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <TextView
+                android:id="@+id/infoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/swipe_to_refresh"
+                android:visibility="@{viewModel.cityList.isEmpty() ? View.VISIBLE : View.GONE}" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:isRefreshing="@{viewModel.isRefreshing}"
+                app:onRefreshListener="@{listener}">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cityList="@{viewModel.cityList}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:onCityClick="@{listener}" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        </FrameLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

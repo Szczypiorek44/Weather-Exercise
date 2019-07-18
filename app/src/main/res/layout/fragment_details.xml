@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="pl.developit.weatherexercise.presentation.screens.details.DetailsViewModel" />
+
+        <variable
+            name="listener"
+            type="pl.developit.weatherexercise.presentation.screens.details.DetailsListener" />
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.city.name}"
+                android:textSize="25sp"
+                tools:text="Warsaw" />
+
+            <TextView
+                android:id="@+id/temperatureTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{@string/temperature_text(viewModel.conditions.temperature.metric.value, viewModel.conditions.temperature.metric.unit)}"
+                android:textSize="25sp"
+                tools:text="The temperature is: 23 *C" />
+
+        </LinearLayout>
+
+        <pl.developit.weatherexercise.presentation.customviews.LoadingLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+    </FrameLayout>
+
+</layout>
