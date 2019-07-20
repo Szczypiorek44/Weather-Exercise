@@ -1,6 +1,7 @@
 package pl.developit.weatherexercise.presentation.screens.main
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -24,6 +25,16 @@ class MainActivity : AppCompatActivity() {
 
         if (savedInstanceState != null) return  // if savedInstanceState is not null then it means that we are returning to the app
         else viewModel.showSearchFragment()     // fragment has been saved = no need to show new fragment
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun observeEvents() {

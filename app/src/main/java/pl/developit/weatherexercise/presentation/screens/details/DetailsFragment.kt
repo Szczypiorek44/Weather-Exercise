@@ -2,7 +2,6 @@ package pl.developit.weatherexercise.presentation.screens.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -48,16 +47,6 @@ class DetailsFragment : BaseFragment(), DetailsListener {
         viewModel.city.value = arguments?.city
         viewModel.getConditions()
         return binding.root
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item?.itemId) {
-            android.R.id.home -> {
-                requireActivity().onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
