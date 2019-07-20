@@ -9,11 +9,13 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.fragment_details.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.developit.weatherexercise.R
 import pl.developit.weatherexercise.data.models.City
 import pl.developit.weatherexercise.data.models.Temperature
 import pl.developit.weatherexercise.databinding.FragmentDetailsBinding
+import pl.developit.weatherexercise.presentation.screens.main.MainViewModel
 import pl.developit.weatherexercise.presentation.utils.BaseFragment
 import pl.developit.weatherexercise.presentation.utils.BundleDelegate
 
@@ -23,6 +25,7 @@ class DetailsFragment : BaseFragment(), DetailsListener {
     private var Bundle.conditions by BundleDelegate.Conditions("conditions")
 
     private val viewModel by viewModel<DetailsViewModel>()
+    private val mainViewModel by sharedViewModel<MainViewModel>()
 
     companion object {
         fun newInstance(city: City) = DetailsFragment().apply {
@@ -40,7 +43,7 @@ class DetailsFragment : BaseFragment(), DetailsListener {
                 }
         observeEvents()
 
-        mainCommunicator.showActionBarBackButton()
+        mainViewModel.showActionBarBackButton()
 
         viewModel.city.value = arguments?.city
         viewModel.getConditions()

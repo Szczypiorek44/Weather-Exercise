@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.developit.weatherexercise.R
 import pl.developit.weatherexercise.data.models.City
 import pl.developit.weatherexercise.databinding.FragmentSearchBinding
+import pl.developit.weatherexercise.presentation.screens.main.MainViewModel
 import pl.developit.weatherexercise.presentation.utils.BaseFragment
 import pl.developit.weatherexercise.presentation.utils.BundleDelegate
 
@@ -19,6 +21,7 @@ class SearchFragment : BaseFragment(), SearchListener {
     private var Bundle.cityList by BundleDelegate.CityList("cityList")
 
     private val viewModel by viewModel<SearchViewModel>()
+    private val mainViewModel by sharedViewModel<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,7 @@ class SearchFragment : BaseFragment(), SearchListener {
             }
         observeEvents()
 
+        mainViewModel.hideActionBarBackButton()
         viewModel.getCityHistory()
         return binding.root
     }
@@ -57,7 +61,7 @@ class SearchFragment : BaseFragment(), SearchListener {
     }
 
     override fun onCityClick(city: City) {
-        mainCommunicator.showDetailsFragment(city)
+        mainViewModel.showDetailsFragment(city)
     }
 
     private fun observeEvents() {
