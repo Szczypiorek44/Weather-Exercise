@@ -50,7 +50,7 @@ class DetailsFragment : BaseFragment(), DetailsListener {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
             android.R.id.home -> {
-                activity?.onBackPressed()
+                requireActivity().onBackPressed()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -81,16 +81,14 @@ class DetailsFragment : BaseFragment(), DetailsListener {
     }
 
     private fun resolveTemperatureColor(temperatureModel: Temperature.Model) {
-        context?.let {
-            when {
-                temperatureModel.value < 10 -> temperatureTextView.setTextColor(
-                    ContextCompat.getColor(it, R.color.blue)
-                )
-                temperatureModel.value < 20 -> temperatureTextView.setTextColor(
-                    ContextCompat.getColor(it, R.color.black)
-                )
-                else -> temperatureTextView.setTextColor(ContextCompat.getColor(it, R.color.red))
-            }
+        when {
+            temperatureModel.value < 10 -> temperatureTextView.setTextColor(
+                ContextCompat.getColor(requireContext(), R.color.blue)
+            )
+            temperatureModel.value < 20 -> temperatureTextView.setTextColor(
+                ContextCompat.getColor(requireContext(), R.color.black)
+            )
+            else -> temperatureTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
         }
 
     }
