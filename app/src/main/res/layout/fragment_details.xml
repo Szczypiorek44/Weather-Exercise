@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -41,6 +42,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@{@string/temperature_text(viewModel.conditions.temperature.metric.value, viewModel.conditions.temperature.metric.unit)}"
                 android:textSize="25sp"
+                app:textColorResource="@{viewModel.temperatureColor}"
                 tools:text="The temperature is: 23 *C" />
 
         </LinearLayout>

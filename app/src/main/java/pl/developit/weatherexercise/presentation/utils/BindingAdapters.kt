@@ -4,6 +4,8 @@ import android.R
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -32,4 +34,9 @@ fun AutoCompleteTextView.setCityHistory(cityHistory: Set<String>, showDropDownOn
     setAdapter(ArrayAdapter(context, R.layout.simple_list_item_1, cityHistory.toList()))
     if (showDropDownOnFocus)
         onFocusChangeListener = View.OnFocusChangeListener { _, focused -> if (focused) showDropDown() }
+}
+
+@BindingAdapter("textColorResource")
+fun TextView.setTextColorResource(textColorResource: Int) {
+    if (textColorResource != 0) setTextColor(ContextCompat.getColor(context, textColorResource))
 }

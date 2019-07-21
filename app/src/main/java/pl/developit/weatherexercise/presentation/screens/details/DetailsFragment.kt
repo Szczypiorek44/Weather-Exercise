@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import kotlinx.android.synthetic.main.fragment_details.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pl.developit.weatherexercise.R
 import pl.developit.weatherexercise.data.models.City
-import pl.developit.weatherexercise.data.models.Temperature
 import pl.developit.weatherexercise.databinding.FragmentDetailsBinding
 import pl.developit.weatherexercise.presentation.screens.main.MainViewModel
 import pl.developit.weatherexercise.presentation.utils.BaseFragment
@@ -67,21 +64,7 @@ class DetailsFragment : BaseFragment(), DetailsListener {
         viewModel.liveEvent.observe(this, Observer {
             when (it) {
                 is DetailsViewModel.DetailsEvent.Error -> showError(it.error)
-                is DetailsViewModel.DetailsEvent.ConditionsReady -> resolveTemperatureColor(it.conditions.temperature.metric)
             }
         })
-    }
-
-    private fun resolveTemperatureColor(temperatureModel: Temperature.Model) {
-        when {
-            temperatureModel.value < 10 -> temperatureTextView.setTextColor(
-                ContextCompat.getColor(requireContext(), R.color.blue)
-            )
-            temperatureModel.value < 20 -> temperatureTextView.setTextColor(
-                ContextCompat.getColor(requireContext(), R.color.black)
-            )
-            else -> temperatureTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
-        }
-
     }
 }
