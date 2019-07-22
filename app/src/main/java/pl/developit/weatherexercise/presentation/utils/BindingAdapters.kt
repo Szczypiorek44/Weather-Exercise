@@ -1,6 +1,5 @@
 package pl.developit.weatherexercise.presentation.utils
 
-import android.R
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -29,9 +28,13 @@ fun SwipeRefreshLayout.isRefreshing(isRefreshing: Boolean) {
     setRefreshing(isRefreshing)
 }
 
-@BindingAdapter("cityHistory", "showDropDownOnFocus")
-fun AutoCompleteTextView.setCityHistory(cityHistory: Set<String>, showDropDownOnFocus: Boolean) {
-    setAdapter(ArrayAdapter(context, R.layout.simple_list_item_1, cityHistory.toList()))
+@BindingAdapter("cityHistory")
+fun AutoCompleteTextView.setCityHistory(cityHistory: Set<String>) {
+    setAdapter(ArrayAdapter(context, android.R.layout.simple_list_item_1, cityHistory.toList()))
+}
+
+@BindingAdapter("showDropDownOnFocus")
+fun AutoCompleteTextView.showDropDownOnFocus(showDropDownOnFocus: Boolean) {
     if (showDropDownOnFocus)
         onFocusChangeListener = View.OnFocusChangeListener { _, focused -> if (focused) showDropDown() }
 }
