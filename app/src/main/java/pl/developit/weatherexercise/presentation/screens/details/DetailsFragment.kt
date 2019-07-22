@@ -15,7 +15,7 @@ import pl.developit.weatherexercise.presentation.screens.main.MainViewModel
 import pl.developit.weatherexercise.presentation.utils.BaseFragment
 import pl.developit.weatherexercise.presentation.utils.BundleDelegate
 
-class DetailsFragment : BaseFragment(), DetailsListener {
+class DetailsFragment : BaseFragment() {
 
     private var Bundle.city by BundleDelegate.City("city")
     private var Bundle.conditions by BundleDelegate.Conditions("conditions")
@@ -34,7 +34,6 @@ class DetailsFragment : BaseFragment(), DetailsListener {
             DataBindingUtil.inflate<FragmentDetailsBinding>(inflater, R.layout.fragment_details, container, false)
                 .also {
                     it.lifecycleOwner = this
-                    it.listener = this
                     it.viewModel = viewModel
                 }
         observeEvents()

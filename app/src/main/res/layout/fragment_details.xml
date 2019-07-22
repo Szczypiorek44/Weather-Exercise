@@ -11,10 +11,6 @@
             name="viewModel"
             type="pl.developit.weatherexercise.presentation.screens.details.DetailsViewModel" />
 
-        <variable
-            name="listener"
-            type="pl.developit.weatherexercise.presentation.screens.details.DetailsListener" />
-
     </data>
 
     <FrameLayout
